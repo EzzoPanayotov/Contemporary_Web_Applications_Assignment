@@ -1,38 +1,279 @@
-.App {
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Import Roboto weight black from google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap');
+
+/* Navigation bar */
+.navBarMain{
+  width: 100%;
+  height: 80px;
+  display: flex;
+  border-bottom: 2px solid #EAEAEA;
+}
+
+.logoDiv{
+  display: inline-block;
+  width: 40%;
+  height: inherit;
+}
+
+.logoDiv > .solentLogo{
+  width: 120px;
+  height: 70px;
+  margin: 0.5em 0 0 1.5em;
+}
+
+.pageIndicatorDiv{
+  display: flex;
+  align-items: center;
+  width: 40%;
+  height: inherit;
+}
+
+.pageIndicatorDiv > h3{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
   text-align: center;
+  color: #E30613;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.registerLoginBtns{
+  height: inherit;
+  display: flex;
+  width: 50%;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 1.5em 0 0;
+  gap: 0.5em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.registerBtn{
+  width: 110px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  border: none;
+  outline: none;
+  background: linear-gradient(120.76deg, #2B3594 0%, #ED1C24 94.54%);
+  border-radius: 5px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  cursor: pointer;
+}
+.registerBtn:hover{
+  background: linear-gradient(120.76deg, #ED1C24 0%, #2D3594 94.54%);
+  box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.loginBtn{
+  width: 70px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  border: none;
+  outline: none;
+  background: linear-gradient(120.76deg, #2B3594 0%, #ED1C24 94.54%);
+  border-radius: 5px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.loginBtn:hover{
+  background: linear-gradient(120.76deg, #ED1C24 0%, #2D3594 94.54%);
+  box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
+}
+
+/* Side bar */
+
+.sideBarMain{
+  position: fixed;
+  width: 30%;
+  height: 100%;
+  left: 0%;
+  top: 80px;
+}
+
+.sideBarFlex{
+  width: 100%;
+  height: 85%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
+}
+
+.searchContainer{
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 3em 0 0 1.5em;
+  gap: 0.5em;
+  margin: 0 0 3em 0;
+}
+
+.searchIcon{
+  height: 25px;
+  align-self: center;
+}
+
+.searchInput{
+  outline: none;
+  border: none;
+  height: 30px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 0 0 0 1em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+.searchInput:focus{
+  background-color: #F3F3F3;
+}
+
+.searchInput::placeholder{
+  color: black;
+  opacity: 1;
+  font-weight: 500;
+}
+
+.menu-paragraph{
+  padding: 0 0 1em 2em;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: #808080;
+}
+
+.questionsBtn{
+  width: 100%;
+  height: 38px;
+  display: flex;
+  padding: 0 0 0 2em;
+  align-items: center;
+  gap: 0.5em;
+  border: none;
+  outline: none;
+  background: linear-gradient(163.76deg, #2B3594 0%, #ED1C24 94.54%);
+  border-radius: 5px;
   color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+.questionsBtn:hover{
+  background: linear-gradient(163.76deg, #ED1C24 0%, #2D3594 94.54%);
+  box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
 }
 
-.App-link {
-  color: #61dafb;
+.tagsBtn{
+  width: 100%;
+  height: 38px;
+  display: flex;
+  padding: 0 0 0 2em;
+  margin: 0.5em 0 0 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+  border: none;
+  outline: none;
+  background: linear-gradient(163.76deg, #2B3594 0%, #ED1C24 94.54%);
+  border-radius: 5px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tagsIconAndTextContainer{
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
 }
+
+.arrowVector{
+  padding: 0 1em 0 0;
+}
+
+.tagsBtn:hover{
+  background: linear-gradient(163.76deg, #ED1C24 0%, #2D3594 94.54%);
+  box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
+}
+
+.socials{
+  width: 100%;
+  gap: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.socials:last-of-type{
+  margin-top: auto;
+}
+
+/* Main Content */
+
+.mainContainer{
+  width: 100%;
+  height: 100%;
+  background-color: #E5E5E5;
+  position: fixed;
+  left: 30%;
+  top: 80px;
+}
+
+.mainContent{
+  width: 80%;
+  height: 87%;
+}
+
+/* Footer */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #828892;
+  color: white;
+  text-align: center;
+}
+@media screen and (max-width: 667px){
+  .logoDiv > .solentLogo{
+    width: 80px;
+    height: 70px;
+    margin: 0 0 0 0.5em;
+  }
+  .pageIndicatorDiv{
+    justify-content: center;
+  }
+  .pageIndicatorDiv > h3{
+    font-size: 15px;
+  }
+  .registerLoginBtns{
+    padding: 0 0.5em 0 0;
+  }
+  .registerBtn{
+    width: 80px;
+    height: 30px;
+    font-size: 10px;
+  }
+  .loginBtn{
+    width: 60px;
+    height: 30px;
+    font-size: 10px;
+  }
+  /* .sideBarMain{
+    display: none;
+  } */
+
+} 
