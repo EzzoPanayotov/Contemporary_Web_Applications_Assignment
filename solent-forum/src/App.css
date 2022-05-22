@@ -15,8 +15,12 @@
   border-bottom: 2px solid #EAEAEA;
 }
 
+.hamburgerMenuIcon{
+  display: none;
+}
+
 .logoDiv{
-  display: inline-block;
+  display: flex;
   width: 40%;
   height: inherit;
 }
@@ -94,14 +98,15 @@
   box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
 }
 
+/* Burger Menu */
+.mobileNavigation{
+  display: none;
+}
 /* Side bar */
 
 .sideBarMain{
-  position: fixed;
   width: 30%;
-  height: 100%;
-  left: 0%;
-  top: 80px;
+  height: calc(100vh - 100px);
 }
 
 .sideBarFlex{
@@ -123,6 +128,7 @@
 .searchIcon{
   height: 25px;
   align-self: center;
+  cursor: pointer;
 }
 
 .searchInput{
@@ -187,7 +193,9 @@
   gap: 0.5em;
   border: none;
   outline: none;
-  background: linear-gradient(163.76deg, #2B3594 0%, #ED1C24 94.54%);
+  background-color: #EAEAEA;
+  color: black;
+  /* background: linear-gradient(163.76deg, #2B3594 0%, #ED1C24 94.54%); */
   border-radius: 5px;
   color: white;
   font-family: 'Roboto', sans-serif;
@@ -198,17 +206,19 @@
 .tagsIconAndTextContainer{
   display: flex;
   align-items: center;
+  color: black;
   gap: 0.5em;
 }
 
 .arrowVector{
   padding: 0 1em 0 0;
+  fill: white;
 }
 
-.tagsBtn:hover{
+/* .tagsBtn:hover{
   background: linear-gradient(163.76deg, #ED1C24 0%, #2D3594 94.54%);
   box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
-}
+} */
 
 .socials{
   width: 100%;
@@ -222,19 +232,80 @@
 }
 
 /* Main Content */
+.flexContainer{
+  display: flex;
+}
 
+.searchContainerMain{
+  display: none;
+}
 .mainContainer{
   width: 100%;
-  height: 100%;
-  background-color: #E5E5E5;
-  position: fixed;
-  left: 30%;
-  top: 80px;
+  height: calc(100vh - 100px);
+  background-color: #F7F7F7;
+  display: flex;
+  justify-content: center;
+
 }
 
 .mainContent{
-  width: 80%;
-  height: 87%;
+  width: 100%;
+  height: 85%;
+  text-align: center;
+}
+
+/* Card Filters */
+.cardFilter{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.cardBtn{
+  width: 75px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  border: none;
+  border-radius: 100px;
+  background-color: #EAEAEA;
+  outline: none;
+  cursor: pointer;
+}
+
+.flameIconPath{
+  fill: #808080;
+}
+
+.arrowUpIconPath, .clockIconPath{
+  stroke: #808080;
+}
+.cardBtn:active{
+  background: linear-gradient(150.76deg, #ED1C24 0%, #2D3594 94.54%);
+  color: white;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cardBtn:active > .clockIcon > .clockIconPath{
+  stroke: white;
+}
+.cardBtn:active > .flameIcon > g > .flameIconPath{
+  fill: white;
+}
+
+.cardBtn:active > .arrowUpIcon > .arrowUpIconPath{
+  stroke: white;
+}
+
+.checkIconPath{
+  stroke: #808080;
+}
+
+.cardBtn:active > .checkIcon > g > .checkIconPath{
+  stroke: white;
 }
 
 /* Footer */
@@ -248,18 +319,59 @@
   text-align: center;
 }
 @media screen and (max-width: 667px){
+  .hamburgerMenu{
+    width: 20%;
+  }
+
+  .hamburgerMenuIcon{
+    display: block;
+    outline: none;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .navigation{
+    display: none;
+  }
+
+  .mobileNavigation{
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    background: rgba(161, 161, 161, 0.8);
+    border-radius: 5px;
+
+  }
+  .tagsBtn{
+    display: none;
+  }
+
+  .menu-paragraph{
+    display: none;
+  }
+
+  .logoDiv{
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
   .logoDiv > .solentLogo{
     width: 80px;
     height: 70px;
     margin: 0 0 0 0.5em;
   }
   .pageIndicatorDiv{
-    justify-content: center;
-  }
-  .pageIndicatorDiv > h3{
-    font-size: 15px;
+    display: none;
   }
   .registerLoginBtns{
+    width: 100%;
     padding: 0 0.5em 0 0;
   }
   .registerBtn{
@@ -272,8 +384,41 @@
     height: 30px;
     font-size: 10px;
   }
-  /* .sideBarMain{
+  .sideBarMain{
     display: none;
-  } */
+  }
 
+  
+.searchContainerMain{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0.5em;
+  gap: 0.5em;
+}
+
+
+.searchIconMain{
+  height: 25px;
+  -webkit-tap-highlight-color: transparent;
+  align-self: center;
+  cursor: pointer;
+}
+
+.searchInputMain{
+  outline: none;
+  border: none;
+  height: 30px;
+  width: 100%;
+  background-color: #F7F7F7;
+  border-radius: 5px;
+  padding: 0 0 0 1em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+.searchInputMain::placeholder{
+  color: black;
+  opacity: 1;
+  font-weight: 500;
+}
 } 

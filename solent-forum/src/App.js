@@ -1,14 +1,12 @@
 import './App.css';
 import Footer from './Components/Footer';
-import MainContent from './Components/MainContent';
 import NavBar from './Components/NavBar';
-import SideBar from './Components/SideBar';
+import FlexContainer from './Components/FlexContainer';
 function App() {
   return (
     <div className="App">
-      <MainContent></MainContent>
       <NavBar></NavBar>
-      <SideBar></SideBar>
+      <FlexContainer></FlexContainer>
       <Footer></Footer>
     </div>
   );
