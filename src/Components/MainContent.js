@@ -1,5 +1,7 @@
 import React from 'react'
 import '../App.css'
+import PostCard from './PostCard'
+import RightSideInfo from './RightSideInfo'
 
 function MainContent() {
   return (
@@ -53,26 +55,9 @@ function MainContent() {
                 Closed
                 </button>
             </div>
+        <PostCard></PostCard>
         </div>
-        <div className='postCard'>
-            <div className='cardHeader'>
-
-            </div>
-            <div className='cardTitle'>
-
-            </div>
-            <div className='cardQuestion'>
-
-            </div>
-            <div className='cardFooter'>
-                <div className='cardTags'>
-
-                </div>
-                <div className='cardReactions'>
-
-                </div>
-            </div>
-        </div>
+        <RightSideInfo></RightSideInfo>
     </div>
   )
 }

@@ -1,14 +1,21 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Footer from './Components/Footer';
 import NavBar from './Components/NavBar';
-import FlexContainer from './Components/FlexContainer';
+import Register from './Pages/Register';
+import Home from './Pages/Home';
 function App() {
   return (
-    <div className="App">
-      <NavBar></NavBar>
-      <FlexContainer></FlexContainer>
-      <Footer></Footer>
-    </div>
+    <>
+    <Router>
+      <div>
+        <NavBar/>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/Register' element={<Register/>}/>
+        </Routes>
+      </div>
+    </Router>
+    </>
   );
 }
 
