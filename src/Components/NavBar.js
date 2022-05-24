@@ -2,9 +2,12 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import MobileNavigation from './MobileNavigation'
 import {useState} from 'react'
+import { useLocation } from 'react-router-dom'
 import '../App.css'
+import Logout from './Logout'
 function NavBar() {
     const [open, setOpen] = useState(false);
+    const currLocation = useLocation()
     const hamburgerIcon = <img className='hamburgerMenuIcon' src={process.env.PUBLIC_URL + '/Images/hamburgerIcon.svg'}
         alt='Hamburger Menu Open Icon'
         onClick={() => setOpen(!open)}/>
@@ -27,9 +30,14 @@ function NavBar() {
         </div>
 
         <div className='pageIndicatorDiv'>
-            <h3>Questions</h3>
+            <h3>
+                {currLocation.pathname === '/' ? 'Home' : ''}
+                {currLocation.pathname === '/Register' ? 'Register' : ''}
+                {currLocation.pathname === '/Login' ? 'Login' : ''}
+            </h3>
         </div>
         <div className='registerLoginBtns'>
+                <Logout/>
                 <Link to = '/Register'>
                     <button className='registerBtn'>
                         <img className='registerImg' 
@@ -38,7 +46,9 @@ function NavBar() {
                         Register
                     </button>
                 </Link>
-            <button className='loginBtn'>Login</button>
+                <Link to = '/Login'>
+                    <button className='loginBtn'>Login</button>
+                </Link>
         </div>
     </div>
   )

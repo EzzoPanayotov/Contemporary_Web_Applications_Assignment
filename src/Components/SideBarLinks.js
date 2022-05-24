@@ -1,4 +1,4 @@
-const NavLinks = () =>{
+const SideBarLinks = () =>{
     
     return(
         <div className='menu'>
@@ -24,4 +24,4 @@ const NavLinks = () =>{
     );
 }
 
-export default NavLinks
+export default SideBarLinks

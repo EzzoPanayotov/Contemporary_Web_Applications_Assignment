@@ -4,31 +4,26 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import '../App.css'
 
-function RegisterComponent() {
+function LoginComponent() {
 
   const emailRef = useRef();
   const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-  const {signup} = useAuth();
+  const { login} = useAuth();
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate();
-
+  const navigate = useNavigate;
+  
   async function handleSubmit(e){
     e.preventDefault()
-
-    if(passwordRef.current.value !== passwordConfirmRef.current.value){
-      return setError('Passwords do not match!')
-    }
 
     try {
       setError('')
       setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
+      await login(emailRef.current.value, passwordRef.current.value)
       navigate('/')
-
+      
     } catch {
-      setError('Failed to create an account')
+      setError('Failed to log in')
     }
 
     setLoading(false)
@@ -37,8 +32,9 @@ function RegisterComponent() {
   return (
     <div className='registerComponent'>
       <div className='registerFormContainer'>
-        <h2>Join Solent's Curious Community</h2>
-        <p>Get answers to your questions here!</p>
+        <h2>Welcome Back</h2>
+        <p>Hurry up!</p>
+        <p>Other students are awaiting your answers!</p>
         {error && <p className='RegisterError'>{error}</p>}
         {/* form here */}
         <form className='registerForm' onSubmit={handleSubmit}>
@@ -46,18 +42,16 @@ function RegisterComponent() {
             <input type='email' ref={emailRef} required/>
           <label>Password</label>
             <input type='password' ref={passwordRef} required/>
-          <label>Confirm Password</label>
-            <input type='password' ref={passwordConfirmRef} required/>
-          <button disabled={loading} className='formButton' type='submit'>Register</button>
+          <button disabled={loading} className='formButton' type='submit'>Login</button>
         </form> 
-        Already got an account? <Link to = '/Login'>Login</Link>
+        Don't have an account? <Link to = '/Register'>Register</Link>
       </div>
       <div className='registerComponentImage'>
-        <img src={process.env.PUBLIC_URL + '/Images/SolentUniversity.jpg'}
+        <img src={process.env.PUBLIC_URL + '/Images/SolentUniversityLogin.jpg'}
           alt='Solent University Southampton Pod'/>
       </div>
     </div>
   )
 }
 
-export default RegisterComponent
+export default LoginComponent

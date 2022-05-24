@@ -1,10 +1,10 @@
-import NavLinks from "./NavLinks";
+import SideBarLinks from "./SideBarLinks";
 
 const MobileNavigation = () =>{
 
     return(
         <nav className="mobileNavigation">
-            <NavLinks/>
+            <SideBarLinks/>
         </nav>
     );
 }

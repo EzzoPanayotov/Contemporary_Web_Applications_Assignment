@@ -33,6 +33,8 @@
   /* justify-content: center; */
   align-items: center;
   border: none;
+  outline: none;
+  cursor: pointer;
   background-color: rebeccapurpled;
   -webkit-tap-highlight-color: transparent;
 }
@@ -43,7 +45,7 @@
 }
 
 .logoDiv{
-  width: 120px;
+  width: 19%;
   height: 70px;
   margin: 0.5em 0 0 1.5em;
 }
@@ -81,7 +83,7 @@
   gap: 0.5em;
   border: none;
   outline: none;
-  background: linear-gradient(120.76deg, #2B3594 0%, #ED1C24 94.54%);
+  background: linear-gradient(150.76deg, #2B3594 0%, #ED1C24 94.54%);
   border-radius: 5px;
   color: white;
   font-family: 'Roboto', sans-serif;
@@ -92,7 +94,7 @@
 a:-webkit-any-link{text-decoration: none;}
 
 .registerBtn:hover{
-  background: linear-gradient(120.76deg, #ED1C24 0%, #2D3594 94.54%);
+  background: linear-gradient(150.76deg, #ED1C24 0%, #2D3594 94.54%);
   box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
 }
 
@@ -105,7 +107,7 @@ a:-webkit-any-link{text-decoration: none;}
   gap: 0.5em;
   border: none;
   outline: none;
-  background: linear-gradient(120.76deg, #2B3594 0%, #ED1C24 94.54%);
+  background: linear-gradient(150.76deg, #2B3594 0%, #ED1C24 94.54%);
   border-radius: 5px;
   color: white;
   font-family: 'Roboto', sans-serif;
@@ -114,7 +116,7 @@ a:-webkit-any-link{text-decoration: none;}
 }
 
 .loginBtn:hover{
-  background: linear-gradient(120.76deg, #ED1C24 0%, #2D3594 94.54%);
+  background: linear-gradient(150.76deg, #ED1C24 0%, #2D3594 94.54%);
   box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
 }
 
@@ -140,6 +142,7 @@ a:-webkit-any-link{text-decoration: none;}
 .searchContainer{
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 3em 0 0 1.5em;
   gap: 0.5em;
   margin: 0 0 3em 0;
@@ -160,6 +163,7 @@ a:-webkit-any-link{text-decoration: none;}
   padding: 0 0 0 1em;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
+  background-color: #EEEEEE;
 }
 
 .searchInput:focus{
@@ -190,7 +194,7 @@ a:-webkit-any-link{text-decoration: none;}
   gap: 0.5em;
   border: none;
   outline: none;
-  background: linear-gradient(163.76deg, #2B3594 0%, #ED1C24 94.54%);
+  background: linear-gradient(150.76deg, #2B3594 0%, #ED1C24 94.54%);
   border-radius: 5px;
   color: white;
   font-family: 'Roboto', sans-serif;
@@ -198,7 +202,7 @@ a:-webkit-any-link{text-decoration: none;}
   cursor: pointer;
 }
 .questionsBtn:hover{
-  background: linear-gradient(163.76deg, #ED1C24 0%, #2D3594 94.54%);
+  background: linear-gradient(150.76deg, #ED1C24 0%, #2D3594 94.54%);
   box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
 }
 
@@ -265,6 +269,7 @@ a:-webkit-any-link{text-decoration: none;}
   background-color: #F7F7F7;
   display: flex;
   justify-content: flex-start;
+  padding: 0 1.3em 0 0;
 
 }
 
@@ -375,7 +380,7 @@ a:-webkit-any-link{text-decoration: none;}
 }
 
 .cardBtn:hover{
-  background: linear-gradient(163.76deg, #2B3594 0%, #ED1C24 94.54%);
+  background: linear-gradient(150.76deg, #2B3594 0%, #ED1C24 94.54%);
   color: white;
   box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
 }
@@ -460,6 +465,8 @@ a:-webkit-any-link{text-decoration: none;}
   gap: 0.5em;
   margin: 0 0 1em 0;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
 }
 
 .postCard:hover{
@@ -596,15 +603,60 @@ a:-webkit-any-link{text-decoration: none;}
   padding: 10px;
   border-radius: 5px;
 }
+
+/* Register Page */
+
+.registerComponent{
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.registerFormContainer{
+  width: 35%;
+  background-color: #F7F7F7;
+}
+
+.registerComponentImage{
+  width: 65%;
+  height: calc(100vh - 71px);  
+}
+
+.registerComponentImage > img{
+  height: 100%;
+}
 /* Footer */
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10em;
+  align-items: center;
   width: 100%;
-  background-color: #828892;
-  color: white;
+  height: 200px;
+  background-color: white;
   text-align: center;
+  border-top: 2px solid #EAEAEA;
+}
+
+.footer > ul{
+  list-style: none;
+}
+
+.footer > ul > li, .footer > ul > h3{
+  text-align: left;
+}
+
+.footer > ul > li{
+  padding: 0.5em 0 0 0;
+}
+
+.footer > ul > li > a{
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+.footer > ul > li > a:hover{
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 1140px){
@@ -614,6 +666,52 @@ a:-webkit-any-link{text-decoration: none;}
   
   .mainContent{
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 1000px){
+
+  .searchContainer > img, .searchContainer > input{
+    display: none;
+  }
+
+  .searchContainer{
+    height: 78px;
+  }
+
+  .searchContainerMain{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.5em;
+    gap: 0.5em;
+  }
+  
+  
+  .searchIconMain{
+    height: 25px;
+    -webkit-tap-highlight-color: transparent;
+    align-self: center;
+    cursor: pointer;
+  }
+  
+  .searchInputMain{
+    outline: none;
+    border: none;
+    height: 30px;
+    width: 80%;
+    background-color: #F7F7F7;
+    border-radius: 5px;
+    padding: 0 0 0 1em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    background-color: #EEEEEE;
+  }
+  
+  .searchInputMain::placeholder{
+    color: black;
+    opacity: 1;
+    font-weight: 500;
   }
 }
 
@@ -642,7 +740,7 @@ a:-webkit-any-link{text-decoration: none;}
   }
 
   .hamburgerMenu{
-    width: 40px;
+    width: 40px;  
   }
 
   .hamburgerMenuIcon{
@@ -650,7 +748,7 @@ a:-webkit-any-link{text-decoration: none;}
     outline: none;
     border: none;
     -webkit-tap-highlight-color: transparent;
-    width: 100%;
+    width: 40px;
     cursor: pointer;
   }
 
@@ -679,7 +777,7 @@ a:-webkit-any-link{text-decoration: none;}
   }
 
   .logoDiv{
-    width: 100%;
+    width: 40%;
     justify-content: space-evenly;
     align-items: center;
   }
@@ -707,6 +805,7 @@ a:-webkit-any-link{text-decoration: none;}
     height: 30px;
     font-size: 10px;
   }
+
   .sideBarMain{
     display: none;
   }
@@ -732,12 +831,13 @@ a:-webkit-any-link{text-decoration: none;}
   outline: none;
   border: none;
   height: 30px;
-  width: 100%;
+  width: 80%;
   background-color: #F7F7F7;
   border-radius: 5px;
   padding: 0 0 0 1em;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
+  background-color: #EEEEEE;
 }
 
 .searchInputMain::placeholder{
