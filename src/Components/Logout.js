@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom'
 
 function Logout() {
 
-    const { currentUser, logout } = useAuth();
+    const { logout } = useAuth();
     const [error, setError] = useState('')
     const navigate = useNavigate()
 
@@ -15,14 +15,12 @@ function Logout() {
             await logout()
             navigate('/')
         } catch{
-            setError('Failed to log out')
+            setError('Failed to log out' + {error})
         }
     }
 
   return (
     <div>
-        {error && <p>error</p>}
-        <h3 style={{color: 'red'}}>Email:</h3> {currentUser.email} 
         <button onClick={handleLogout}>Logout</button>
     </div>
   )

@@ -91,6 +91,23 @@
   cursor: pointer;
 }
 
+.askQuestionBtn{
+  width: 150px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  border: none;
+  outline: none;
+  background: linear-gradient(150.76deg, #2B3594 0%, #ED1C24 94.54%);
+  border-radius: 5px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  cursor: pointer;
+}
+
 a:-webkit-any-link{text-decoration: none;}
 
 .registerBtn:hover{
@@ -98,6 +115,10 @@ a:-webkit-any-link{text-decoration: none;}
   box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
 }
 
+.askQuestionBtn:hover{
+  background: linear-gradient(150.76deg, #ED1C24 0%, #2D3594 94.54%);
+  box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
+}
 .loginBtn{
   width: 70px;
   height: 38px;
@@ -615,6 +636,102 @@ a:-webkit-any-link{text-decoration: none;}
 .registerFormContainer{
   width: 35%;
   background-color: #F7F7F7;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 10em 0 0 0;
+  align-items: center;
+}
+
+.registerFormContainer > h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.05em;
+}
+
+.registerFormContainer > p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: 0.05em;
+}
+
+.registerForm{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.registerForm > input{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: 0.02em;
+  width: 380px;
+  height: 42px;
+  background: #FFFFFF;
+  border: 1px solid  #EAEAEA;
+  border-radius: 5px;
+  padding: 0 0 0 1em;
+  outline: none;
+}
+
+.registerForm > input::placeholder{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: 0.02em;
+}
+
+.registerForm > input:hover{
+  border: 1px solid black;
+}
+
+.registerForm > input:focus{
+  border: 1px solid black;
+
+}
+
+.registerFormBtn, .loginFormBtn{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: 0.02em;
+  width: 380px;
+  height: 42px;
+  background: linear-gradient(163.76deg, #2B3594 0%, #ED1C24 94.54%);
+  border-radius: 5px;
+  color: white;
+  text-transform: uppercase;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.registerFormBtn:hover, .loginFormBtn:hover{
+  background: linear-gradient(163.76deg, #ED1C24 0%, #2D3594 94.54%);
+  box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
+}
+
+.gotAnAccount, .dontHaveAcc{
+  display: flex;
+  gap: 0.5em;
+}
+
+.gotAnAccountLink, .dontHaveAccLink, .forgotPassLink{
+  color: #1682FD;
+}
+.gotAnAccountLink:hover, .dontHaveAccLink:hover, .forgotPassLink:hover{
+  color: #1682FD;
+  text-decoration: underline;
 }
 
 .registerComponentImage{
@@ -712,6 +829,17 @@ a:-webkit-any-link{text-decoration: none;}
     color: black;
     opacity: 1;
     font-weight: 500;
+  }
+}
+
+@media screen and (max-width: 1144px){
+  .registerComponentImage{
+    display: none; 
+  }
+
+  .registerFormContainer{
+    width: 100%;
+    height: calc(100vh - 71px); 
   }
 }
 

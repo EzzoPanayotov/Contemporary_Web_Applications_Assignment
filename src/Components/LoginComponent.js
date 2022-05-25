@@ -1,32 +1,32 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState} from 'react';
 import { useAuth } from '../Contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 
-import '../App.css'
+import '../App.css';
 
-function LoginComponent() {
+export default function LoginComponent() {
 
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login} = useAuth();
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate;
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   
   async function handleSubmit(e){
     e.preventDefault()
 
     try {
-      setError('')
-      setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      navigate('/')
+      setError('');
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+      navigate('/');
       
-    } catch {
-      setError('Failed to log in')
+    } catch (errorLogin){
+      setError('Failed to log in');
     }
 
-    setLoading(false)
+    setLoading(false);
   }
 
   return (
@@ -38,13 +38,17 @@ function LoginComponent() {
         {error && <p className='RegisterError'>{error}</p>}
         {/* form here */}
         <form className='registerForm' onSubmit={handleSubmit}>
-          <label>Email</label>
-            <input type='email' ref={emailRef} required/>
-          <label>Password</label>
-            <input type='password' ref={passwordRef} required/>
-          <button disabled={loading} className='formButton' type='submit'>Login</button>
+            <input type='email' ref={emailRef} placeholder='Email' required/>
+            <input type='password' ref={passwordRef} placeholder='Password' required/>
+              <button disabled={loading} className='loginFormBtn' type='submit'>Login</button>
         </form> 
-        Don't have an account? <Link to = '/Register'>Register</Link>
+        <div className='forgotPassword'>
+          <Link to = '/forgot-password'><p className='forgotPassLink'>Forgot password?</p></Link>
+        </div>
+        <div className='dontHaveAcc'>
+
+        Don't have an account? <Link to = '/register'><p className='dontHaveAccLink'>Register</p></Link>
+        </div>
       </div>
       <div className='registerComponentImage'>
         <img src={process.env.PUBLIC_URL + '/Images/SolentUniversityLogin.jpg'}
@@ -53,5 +57,3 @@ function LoginComponent() {
     </div>
   )
 }
-
-export default LoginComponent

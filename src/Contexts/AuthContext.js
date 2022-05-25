@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import 'firebase/compat/auth'
 import { auth } from '../Firebase'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail } from 'firebase/auth'
 
 const AuthContext = React.createContext()
 
@@ -12,6 +12,19 @@ export function useAuth(){
 export function AuthProvider({children}) {
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setIsAuthenticated(true);
+          setCurrentUser(auth.currentUser);
+          localStorage.setItem('userUID', auth.currentUser.uid);
+          return;
+        }
+        setIsAuthenticated(false);
+        return;
+    });
 
     function signup(email, password){
         return createUserWithEmailAndPassword(auth, email, password)
@@ -22,7 +35,12 @@ export function AuthProvider({children}) {
     }
 
     function logout(){
+        localStorage.removeItem('userUID', auth.currentUser.uid)
         return auth.signOut()
+    }
+
+    function resetPassword(email){
+        return sendPasswordResetEmail(auth, email)
     }
 
     useEffect(() =>{
@@ -38,6 +56,8 @@ export function AuthProvider({children}) {
         currentUser,
         login,
         logout,
+        resetPassword,
+        isAuthenticated,
         signup
     }
     return (

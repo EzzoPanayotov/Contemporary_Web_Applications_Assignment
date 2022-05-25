@@ -20,6 +20,10 @@ function RegisterComponent() {
     if(passwordRef.current.value !== passwordConfirmRef.current.value){
       return setError('Passwords do not match!')
     }
+    
+    if (passwordRef.current.value.length < 6) {
+      return setError('Your password must be at least 6 characters');
+    }
 
     try {
       setError('')
@@ -42,15 +46,14 @@ function RegisterComponent() {
         {error && <p className='RegisterError'>{error}</p>}
         {/* form here */}
         <form className='registerForm' onSubmit={handleSubmit}>
-          <label>Email</label>
-            <input type='email' ref={emailRef} required/>
-          <label>Password</label>
-            <input type='password' ref={passwordRef} required/>
-          <label>Confirm Password</label>
-            <input type='password' ref={passwordConfirmRef} required/>
-          <button disabled={loading} className='formButton' type='submit'>Register</button>
-        </form> 
-        Already got an account? <Link to = '/Login'>Login</Link>
+            <input type='email' ref={emailRef} placeholder='Email' required/>
+            <input type='password' ref={passwordRef} placeholder='Password' required/>
+            <input type='password' ref={passwordConfirmRef} placeholder='Confirm Password' required/>
+          <button disabled={loading} className='registerFormBtn' type='submit'>Register</button>
+        </form>
+        <div className='gotAnAccount'>
+        Already got an account? <Link to = '/login'><p className='gotAnAccountLink'>Login</p></Link>
+        </div>
       </div>
       <div className='registerComponentImage'>
         <img src={process.env.PUBLIC_URL + '/Images/SolentUniversity.jpg'}

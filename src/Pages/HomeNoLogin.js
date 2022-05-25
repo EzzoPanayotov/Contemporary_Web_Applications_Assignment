@@ -1,7 +1,8 @@
 import React from 'react'
 import FlexContainer from '../Components/FlexContainer'
 
-function Home() {
+
+function HomeNoLogin() {
   return (
     <div>
         <FlexContainer/>
@@ -9,4 +10,4 @@ function Home() {
   )
 }
 
-export default Home
+export default HomeNoLogin

@@ -1,6 +1,6 @@
 import SideBarLinks from "./SideBarLinks";
 
-const Navigation = () =>{
+const SideBarNavigation = () =>{
     
     return(
         <nav className='navigation'>
@@ -9,4 +9,4 @@ const Navigation = () =>{
     );
 }
 
-export default Navigation
+export default SideBarNavigation

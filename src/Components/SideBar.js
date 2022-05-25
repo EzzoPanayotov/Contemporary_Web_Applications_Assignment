@@ -1,5 +1,5 @@
 import React from 'react'
-import Navigation from './Navigation'
+import SideBarNavigation from './SideBarNavigation'
 import '../App.css'
 
 function SideBar() {
@@ -11,7 +11,7 @@ function SideBar() {
                 <input className='searchInput' type="text" id="search" name="search" placeholder='Search'/>
             </div>
             <div>
-                <Navigation/>
+                <SideBarNavigation/>
             </div>
             <div className='socials'>
                 <p><a href="https://www.instagram.com/solentuniversity/" target='_blank' rel='noopener noreferrer'>

@@ -1,24 +1,17 @@
-import React from 'react'
-import { Navigate } from 'react-router-dom'
-import { useAuth } from '../Contexts/AuthContext'
-import NavBar from './NavBar'
+import React from 'react';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../Contexts/AuthContext';
 
-const PrivateRoute = ({Component}) => {
-
-    const { currentUser } = useAuth()
-    console.log(currentUser)
+const PrivateRoute = ({ Component }) => {
+  const { currentUser } = useAuth();
 
   return currentUser ? (
-      <div>
-          <div>
-
-          <Component/>
-          </div>
-          <NavBar/>
-      </div>
+    <div>
+        <Component />
+    </div>
   ) : (
-      <Navigate to='/Login'/>
-  )
-}
+    <Navigate to='/no-user' />
+  );
+};
 
-export default PrivateRoute
+export default PrivateRoute;
