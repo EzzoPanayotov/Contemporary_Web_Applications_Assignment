@@ -33,7 +33,7 @@ function NavBar() {
                 </button>
             </Link>: ''
             }
-            {currLocation.pathname === '/no-user' ? 
+            {currLocation.pathname === '/no-user' || currLocation.pathname === '/forgot-password'? 
             <Link to='/no-user'>
                 <button className='logoBtn'>
                     <img className='solentLogo' src={process.env.PUBLIC_URL + '/Images/solentLogo.svg'} 

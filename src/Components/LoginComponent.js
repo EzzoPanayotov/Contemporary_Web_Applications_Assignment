@@ -31,7 +31,7 @@ export default function LoginComponent() {
 
   return (
     <div className='registerComponent'>
-      <div className='registerFormContainer'>
+      <div className='registerFormContainer loginFormContainer'>
         <h2>Welcome Back</h2>
         <p>Hurry up!</p>
         <p>Other students are awaiting your answers!</p>

@@ -36,13 +36,12 @@ export default function ForgotPassword() {
         {message && <p className='RegisterError'>{message}</p>}
         {/* form here */}
         <form className='registerForm' onSubmit={handleSubmit}>
-          <label>Email</label>
-            <input type='email' ref={emailRef} required/>
-              <button disabled={loading} className='formButton' type='submit'>Reset Password</button>
+            <input type='email' ref={emailRef} placeholder='Email' required/>
+              <button disabled={loading} className='registerFormBtn' type='submit'>Reset Password</button>
         </form> 
         <div>
 
-        <Link to = '/login'>Login</Link>
+        <Link to = '/login'><p className='gotAnAccountLink'>Login</p></Link>
         </div>
       </div>
       <div className='registerComponentImage'>
