@@ -9,7 +9,9 @@ import PrivateRoute from './Components/PrivateRoute';
 import NavBar from './Components/NavBar';
 import HomePageLoggedIn from './Pages/HomePageLoggedIn';
 import ForgotPassword from './Components/ForgotPassword';
-import ProfileImage from './Components/ProfileImage';
+import Profile from './Pages/Profile';
+import PrivateRouteLoggedIn from './Components/PrivateRouteLoggedIn';
+import AskAQuestion from './Pages/AskAQuestion';
 
 function App() {
   return (
@@ -20,11 +22,12 @@ function App() {
             <NavBar/>
             <Routes>
               <Route exact path='/' element={<PrivateRoute Component={HomePageLoggedIn}/>}/>
-              <Route path='/profile' element={<ProfileImage/>}/>
+              <Route path='/ask-a-question' element={<PrivateRoute Component={AskAQuestion}/>}/>
+              <Route path='/profile' element={<PrivateRoute Component={Profile}/>}/>
               <Route path='/no-user' element={<HomeNoLogin/>}/>
-              <Route path='/forgot-password' element={<ForgotPassword/>}/>
-              <Route path='/register' element={<Register/>}/>
-              <Route path='/login' element={<Login/>}/>
+              <Route path='/forgot-password' element={<PrivateRouteLoggedIn Component={ForgotPassword}/>}/>
+              <Route path='/register' element={<PrivateRouteLoggedIn Component={Register}/>}/>
+              <Route path='/login' element={<PrivateRouteLoggedIn Component={Login}/>}/>
             </Routes>
             <Footer/>
           </AuthProvider>

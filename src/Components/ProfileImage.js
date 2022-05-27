@@ -25,15 +25,21 @@ function ProfileImage() {
     }, [currentUser])
 
   return (
-    <div>
-        <Avatar
-            src={photoURL}
-            sx={{ width: 50, height: 50 }}
-        />
-        <div>
+
+    <div className='profilePage'>
+        <div className='profileInfoContainer'>
+            <h2>Personal Information</h2>
+            <p className='profileInfo'><strong>Email:</strong> {currentUser.email}</p>
+        </div>
+        <div className='changeProfileImgContainer'>
+            <h2>Change Profile Photo</h2>
+            <Avatar className='changeProfileImg'
+                src={photoURL}
+                sx={{ width: 150, height: 150 }}
+            />
             <input type='file' onChange={handleChange}/>
-        <button className='uploadImageBtn' disabled={loading || !photo} onClick={handleUpload}>Upload</button>
-    </div>
+            <button className='uploadImageBtn' disabled={loading || !photo} onClick={handleUpload}>Upload</button>
+        </div>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useAuth } from '../Contexts/AuthContext'
 import {useNavigate} from 'react-router-dom'
+import '../App.css'
 
 function Logout() {
 
@@ -20,8 +21,8 @@ function Logout() {
     }
 
   return (
-    <div>
-        <button onClick={handleLogout}>Logout</button>
+    <div className='logoutBtnContainer'>
+        <button className='logoutBtn' onClick={handleLogout}>Logout</button>
     </div>
   )
 }
