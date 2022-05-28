@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
 export default function LoginComponent() {
-
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login} = useAuth();

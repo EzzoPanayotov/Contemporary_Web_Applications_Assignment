@@ -22,6 +22,7 @@ function ProfileImage() {
         if(currentUser?.photoURL){
             setPhotoURL(currentUser.photoURL)
         }
+        console.log(currentUser)
     }, [currentUser])
 
   return (
@@ -30,6 +31,7 @@ function ProfileImage() {
         <div className='profileInfoContainer'>
             <h2>Personal Information</h2>
             <p className='profileInfo'><strong>Email:</strong> {currentUser.email}</p>
+            <p className='profileInfo'><strong>First Name:</strong> {currentUser.displayName}</p>
         </div>
         <div className='changeProfileImgContainer'>
             <h2>Change Profile Photo</h2>

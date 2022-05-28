@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import 'firebase/compat/auth'
 import { auth } from '../Firebase'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail } from 'firebase/auth'
+import { signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail } from 'firebase/auth'
 
 const AuthContext = React.createContext()
 
@@ -25,10 +25,6 @@ export function AuthProvider({children}) {
         setIsAuthenticated(false);
         return;
     });
-
-    function signup(email, password){
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
 
     function login(email, password){
         return signInWithEmailAndPassword(auth, email, password)
@@ -57,8 +53,7 @@ export function AuthProvider({children}) {
         login,
         logout,
         resetPassword,
-        isAuthenticated,
-        signup
+        isAuthenticated
     }
     return (
       <AuthContext.Provider value={value}>

@@ -1,230 +1,126 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import Avatar from '@mui/material/Avatar'
+// import Moment from 'react-moment'
+import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore'
+import { db } from '../Firebase'
+import { useAuth } from '../Contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
 import '../App.css'
 import PostButtons from './PostButtons'
 
+
 function PostCard() {
+    const navigate = useNavigate();
+    const { currentUser } = useAuth()
+    const [posts, setPosts] = useState([]);
+    const [postId, setPostId] = useState('')
+    // const [postInfo, setPostInfo] = useState('')
+    
+    useEffect(() =>{
+        
+        const getPosts = async () =>{
+            const postsRef = collection(db, 'posts')
+            const data = await getDocs(postsRef)
+            setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+        }
+        getPosts();
+    }, [])
+
+    const deletePost = async (id) =>{
+        const postDoc = doc(db, 'posts', id)
+        alert('Post Deleted')
+        return await deleteDoc(postDoc)
+    } 
+    
+    const editPost = (id, tags, title, question) =>{
+        // const editPostDoc = doc(db, 'posts', id) 
+        // const newFields = {tags: tags, title: title, question: question}
+
+        // setPostInfo('hello')
+        // console.log(postInfo)
+
+        // await updateDoc(postDoc, newFields)
+        navigate('/ask-a-question')
+    }
+
+    const [openSettings, setOpenSettings] = useState(false);
+
+    const getPostId = (id) =>{
+        const postIdFromDoc = doc(db, 'posts', id)
+        setPostId(postIdFromDoc)
+        // console.log(id)
+        if(postIdFromDoc.id === id){
+            setOpenSettings(!openSettings)
+        }
+
+    }
+
   return (
     <div className='postCardMain'>
-        <div className='postCard'>
+        {posts.map((post) => { return <div className='postCard' key={post.id}>
             <div className='cardHeader'>
                 <div className='cardPoster'>
                     <div className='cardPosterImage'>
-                        <img src={process.env.PUBLIC_URL + '/Images/Dimitry.jpg'} alt='Poster profile'/>
+                        <Avatar className='profileImage'
+                            src={post.userProfileImg}
+                            sx = {{width: 40, height: 40}}/> 
                     </div>
                     <div className='cardPosterName'>
-                        <p className='posterName'>Dimitry</p>
-                        <p className='timePosted'>5 min ago</p>
+                        <p className='posterName'>{post.userName}</p>
+                        <p className='timePosted'>{moment(post.date).local().startOf('seconds').fromNow()}</p>
                     </div>
                 </div>
-                <div className='cardSettings'>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-
+                {currentUser ?
+                <div className='cardSettingsOuter'>
+                {currentUser.uid === post.userID &&
+                <div className='cardSettingsContainer'>
+                    {postId.id === post.id && 
+                    <div>
+                        {openSettings ? 
+                            <div className='cardSettingsBtns'>
+                                <button className='editBtn' onClick={() => {editPost(post.id, post.tags, post.title, post.question)}}>Edit</button>
+                                <button className='deleteBtn' onClick={() => {deletePost(post.id)}}>Delete</button>
+                            </div>:''
+                        }
+                    </div>
+                    } 
+                    <button className='cardSettings' 
+                        onClick={() => getPostId(post.id)}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                    </button>
                 </div>
-            
+                }
+                </div>:''
+                }
             </div>
             <div className='cardMainInfo'>
                 <div className='cardTitle'>
-                    <p>What are some of the javascript best-practices?</p>
+                    <p>{post.title}</p>
                 </div>
                 <div className='cardQuestion'>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat aliquet maecenas ut sit nulla</p>
+                    <p>{post.question}</p>
                 </div>
             </div>
             <div className='cardFooter'>
                 <div className='cardTags'>
                     <div className='tag'>
-                        <p>javascript</p>
+                        <p>{post.tags}</p>
                     </div>
                     <div className='tag'>
-                        <p>bestpractices</p>
+                        <p>{post.tags}</p>
                     </div>
                     <div className='tag'>
-                        <p>computerscience</p>
+                        <p>{post.tags}</p>
                     </div>
                 </div>
                     <PostButtons/>
             </div>
-        </div>
-        <div className='postCard'>
-            <div className='cardHeader'>
-                <div className='cardPoster'>
-                    <div className='cardPosterImage'>
-                        <img src={process.env.PUBLIC_URL + '/Images/Dimitry.jpg'} alt='Poster profile'/>
-                    </div>
-                    <div className='cardPosterName'>
-                        <p className='posterName'>Dimitry</p>
-                        <p className='timePosted'>5 min ago</p>
-                    </div>
-                </div>
-                <div className='cardSettings'>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-
-                </div>
-            
-            </div>
-            <div className='cardMainInfo'>
-                <div className='cardTitle'>
-                    <p>What are some of the javascript best-practices?</p>
-                </div>
-                <div className='cardQuestion'>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat aliquet maecenas ut sit nulla</p>
-                </div>
-            </div>
-            <div className='cardFooter'>
-                <div className='cardTags'>
-                    <div className='tag'>
-                        <p>javascript</p>
-                    </div>
-                    <div className='tag'>
-                        <p>bestpractices</p>
-                    </div>
-                    <div className='tag'>
-                        <p>computerscience</p>
-                    </div>
-                </div>
-                    <PostButtons/>
-            </div>
-        </div>
-        <div className='postCard'>
-            <div className='cardHeader'>
-                <div className='cardPoster'>
-                    <div className='cardPosterImage'>
-                        <img src={process.env.PUBLIC_URL + '/Images/Dimitry.jpg'} alt='Poster profile'/>
-                    </div>
-                    <div className='cardPosterName'>
-                        <p className='posterName'>Dimitry</p>
-                        <p className='timePosted'>5 min ago</p>
-                    </div>
-                </div>
-                <div className='cardSettings'>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-
-                </div>
-            
-            </div>
-            <div className='cardMainInfo'>
-                <div className='cardTitle'>
-                    <p>What are some of the javascript best-practices?</p>
-                </div>
-                <div className='cardQuestion'>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat aliquet maecenas ut sit nulla</p>
-                </div>
-            </div>
-            <div className='cardFooter'>
-                <div className='cardTags'>
-                    <div className='tag'>
-                        <p>javascript</p>
-                    </div>
-                    <div className='tag'>
-                        <p>bestpractices</p>
-                    </div>
-                    <div className='tag'>
-                        <p>computerscience</p>
-                    </div>
-                </div>
-                    <PostButtons/>
-            </div>
-        </div>
-        <div className='postCard'>
-            <div className='cardHeader'>
-                <div className='cardPoster'>
-                    <div className='cardPosterImage'>
-                        <img src={process.env.PUBLIC_URL + '/Images/Dimitry.jpg'} alt='Poster profile'/>
-                    </div>
-                    <div className='cardPosterName'>
-                        <p className='posterName'>Dimitry</p>
-                        <p className='timePosted'>5 min ago</p>
-                    </div>
-                </div>
-                <div className='cardSettings'>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-
-                </div>
-            
-            </div>
-            <div className='cardMainInfo'>
-                <div className='cardTitle'>
-                    <p>What are some of the javascript best-practices?</p>
-                </div>
-                <div className='cardQuestion'>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat aliquet maecenas ut sit nulla</p>
-                </div>
-            </div>
-            <div className='cardFooter'>
-                <div className='cardTags'>
-                    <div className='tag'>
-                        <p>javascript</p>
-                    </div>
-                    <div className='tag'>
-                        <p>bestpractices</p>
-                    </div>
-                    <div className='tag'>
-                        <p>computerscience</p>
-                    </div>
-                </div>
-                    <PostButtons/>
-            </div>
-        </div>
-        <div className='postCard'>
-            <div className='cardHeader'>
-                <div className='cardPoster'>
-                    <div className='cardPosterImage'>
-                        <img src={process.env.PUBLIC_URL + '/Images/Dimitry.jpg'} alt='Poster profile'/>
-                    </div>
-                    <div className='cardPosterName'>
-                        <p className='posterName'>Dimitry</p>
-                        <p className='timePosted'>5 min ago</p>
-                    </div>
-                </div>
-                <div className='cardSettings'>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#808080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-
-                </div>
-            
-            </div>
-            <div className='cardMainInfo'>
-                <div className='cardTitle'>
-                    <p>What are some of the javascript best-practices?</p>
-                </div>
-                <div className='cardQuestion'>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat aliquet maecenas ut sit nulla</p>
-                </div>
-            </div>
-            <div className='cardFooter'>
-                <div className='cardTags'>
-                    <div className='tag'>
-                        <p>javascript</p>
-                    </div>
-                    <div className='tag'>
-                        <p>bestpractices</p>
-                    </div>
-                    <div className='tag'>
-                        <p>computerscience</p>
-                    </div>
-                </div>
-                    <PostButtons/>
-            </div>
-        </div>
+        </div>})}
     </div>
     
   )

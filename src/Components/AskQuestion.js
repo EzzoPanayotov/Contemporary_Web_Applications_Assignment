@@ -1,52 +1,52 @@
 import React, { useState, useEffect } from 'react'
 import { db } from '../Firebase'
-import { collection, getDocs, addDoc, updateDoc, doc } from 'firebase/firestore'
+import { collection, getDocs, addDoc} from 'firebase/firestore'
 import { useAuth } from '../Contexts/AuthContext'
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import '../App.css'
+import SideBar from './SideBar'
+import RightSideInfo from './RightSideInfo'
 
 function AskQuestion() {
+    const navigate = useNavigate();
     const { currentUser } = useAuth()
     const [newTags, setNewTags] = useState('')
     const [newTitle, setNewTitle] = useState('')
     const [newQuestion, setNewQuestion] = useState('')
     const [posts, setPosts] = useState([]);
-    // const [postId, setPostId] = useState('')
-    const postsRef = collection(db, 'posts')
-
+    // const [editPostInfo, setEditPostInfo] = useState('')
+    
     const createPost = async (e) =>{
-        e.preventDefault()
-        await addDoc(postsRef, {userID: currentUser.uid, tags: newTags, title: newTitle, question: newQuestion, date: new Date()})
+      const postsRef = collection(db, 'posts')
+      e.preventDefault()
+      await addDoc(postsRef, {userID: currentUser.uid, tags: newTags, title: newTitle, question: newQuestion, date: new Date().toISOString('YYYY-MM-DD HH:mm:ss'), userProfileImg: currentUser.photoURL, userName: currentUser.displayName})
+      
+      navigate('/')
     }
-
-    // const editPost = async (id, tags, title, question) =>{
-    //     const postDoc = doc(db, 'posts', id)
-    //     const newFields = {tags: tags, title: title, question: question}
-    //     await updateDoc(postDoc, newFields)
-    // }
-
-    // const getPostId = (id) =>{
-    //     setPostId(id)
-    // }
-
+    
     useEffect(() =>{
-
-        const getPosts = async () =>{
+      const getPosts = async () =>{
+            const postsRef = collection(db, 'posts')
             const data = await getDocs(postsRef)
             setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
         }
-
         getPosts()
     }, [])
 
-    // do this to read the data : 
-    // console.log(posts.id) 
+    // useEffect(() =>{
+    //   console.log('The id here is: ' + editPostInfo)
+    //   // if(editPostInfo !== undefined && editPostInfo !== ''){
+    //   //   // 
+    //   // }
+    // }, [])
   return (
     <div className='registerComponent'>
-      <div className='registerFormContainer'>
-        <h2>Add a question</h2>
+      <SideBar/>
+      <div className='askQuestionContainer'>
         {/* {error && <p className='RegisterError'>{error}</p>} */}
         {/* form here */}
-        <form className='registerForm'>
+        <form className='askQuestionForm'>
             <input type='text' placeholder='Your Tags e.g.: #javascript'
                 onChange={(event) => {setNewTags(event.target.value)}} required/>
 
@@ -55,23 +55,17 @@ function AskQuestion() {
 
             <textarea type='text' placeholder='Type your question' 
                 onChange={(event) => {setNewQuestion(event.target.value)}}required/>
-
-          <button className='registerFormBtn' type='submit'>Cancel</button>
-          <button className='registerFormBtn' type='submit' onClick={createPost}>Create</button>
+          <div className='askQuestionBtns'>
+            <Link to='/'>
+             <button className='cancelBtn' type='submit'>Cancel</button>
+            </Link>
+            <button className='addQuestionBtn' type='submit' onClick={createPost}>Add/Update</button>
+          </div>
         </form>
+        <RightSideInfo/>
       </div>
-      <div>
-      {posts.map((post) => { return <div key={post.id}> 
-          <p>Tags: {post.tags} </p>
-          <p>Title: {post.title} </p>
-          <p>Question: {post.question} </p>
-          {/* <button onClick={(event) => editPost()}>Edit Post</button> */}
-          {/* {console.log(postId)} */}
-          </div>})}
-      </div>
-
-      <div></div>
     </div>
+    
 
   )
 }

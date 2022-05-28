@@ -4,6 +4,11 @@ import PostCard from './PostCard'
 import RightSideInfo from './RightSideInfo'
 
 function MainContent() {
+
+  // const orderNewPost = async (e) =>{
+  //   e.preventDefault();
+  //   await
+  // }
   return (
     <div className='mainContainer'>
         <div className='mainContent'>
