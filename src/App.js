@@ -12,6 +12,7 @@ import ForgotPassword from './Components/ForgotPassword';
 import Profile from './Pages/Profile';
 import PrivateRouteLoggedIn from './Components/PrivateRouteLoggedIn';
 import AskAQuestion from './Pages/AskAQuestion';
+import YourQuestionsComponent from './Components/YourQuestionsComponent';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Routes>
               <Route exact path='/' element={<PrivateRoute Component={HomePageLoggedIn}/>}/>
               <Route path='/ask-a-question' element={<PrivateRoute Component={AskAQuestion}/>}/>
+              <Route path='/your-questions' element={<PrivateRoute Component={YourQuestionsComponent}/>}/>
               <Route path='/profile' element={<PrivateRoute Component={Profile}/>}/>
               <Route path='/no-user' element={<HomeNoLogin/>}/>
               <Route path='/forgot-password' element={<PrivateRouteLoggedIn Component={ForgotPassword}/>}/>

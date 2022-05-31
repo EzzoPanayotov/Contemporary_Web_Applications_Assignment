@@ -39,7 +39,8 @@ function NavBar() {
                 || currLocation.pathname === '/register' 
                 || currLocation.pathname === '/login'
                 || currLocation.pathname === '/profile' 
-                || currLocation.pathname === '/ask-a-question'?
+                || currLocation.pathname === '/ask-a-question'
+                || currLocation.pathname === '/your-questions'?
             <Link to='/'>
                 <button className='logoBtn'>
                     <img className='solentLogo' src={process.env.PUBLIC_URL + '/Images/solentLogo.svg'} 
@@ -64,7 +65,8 @@ function NavBar() {
                 {currLocation.pathname === '/register' ? 'Register' : ''}
                 {currLocation.pathname === '/login' ? 'Login' : ''}
                 {currLocation.pathname === '/profile' ? 'Profile' : ''}
-                {currLocation.pathname === '/ask-a-question' ? 'Ask a question' : ''}
+                {currLocation.pathname === '/ask-a-question' ? 'New Question' : ''}
+                {currLocation.pathname === '/your-questions' ? 'Your Questions' : ''}
             </h3>
         </div>
         { currLocation.pathname === '/no-user' 
@@ -134,6 +136,16 @@ function NavBar() {
                                 <path d="M4.33337 7H8.66671" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                             Ask a question
+                        </button>
+                    </Link>
+                    <Link to = '/your-questions'>
+                        <button className="yourQuestionsBtnAbsolute">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 16.5C13.1421 16.5 16.5 13.1421 16.5 9C16.5 4.85786 13.1421 1.5 9 1.5C4.85786 1.5 1.5 4.85786 1.5 9C1.5 13.1421 4.85786 16.5 9 16.5Z" stroke="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M6.8175 6.75C6.99383 6.24875 7.34187 5.82608 7.79997 5.55685C8.25807 5.28762 8.79668 5.1892 9.32039 5.27903C9.8441 5.36886 10.3191 5.64114 10.6613 6.04765C11.0035 6.45415 11.1908 6.96864 11.19 7.5C11.19 9 8.94 9.75 8.94 9.75" stroke="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M9 12.75H9.0075" stroke="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            Your questions
                         </button>
                     </Link>
                     <Logout/>

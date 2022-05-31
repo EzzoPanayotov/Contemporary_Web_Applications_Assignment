@@ -22,7 +22,6 @@ function ProfileImage() {
         if(currentUser?.photoURL){
             setPhotoURL(currentUser.photoURL)
         }
-        console.log(currentUser)
     }, [currentUser])
 
   return (

@@ -4,18 +4,16 @@ import Avatar from '@mui/material/Avatar'
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore'
 import { db } from '../Firebase'
 import { useAuth } from '../Contexts/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import moment from 'moment'
 import '../App.css'
 import PostButtons from './PostButtons'
 
 
 function PostCard() {
-    const navigate = useNavigate();
     const { currentUser } = useAuth()
     const [posts, setPosts] = useState([]);
     const [postId, setPostId] = useState('')
-    // const [postInfo, setPostInfo] = useState('')
     
     useEffect(() =>{
         
@@ -32,17 +30,6 @@ function PostCard() {
         alert('Post Deleted')
         return await deleteDoc(postDoc)
     } 
-    
-    const editPost = (id, tags, title, question) =>{
-        // const editPostDoc = doc(db, 'posts', id) 
-        // const newFields = {tags: tags, title: title, question: question}
-
-        // setPostInfo('hello')
-        // console.log(postInfo)
-
-        // await updateDoc(postDoc, newFields)
-        navigate('/ask-a-question')
-    }
 
     const [openSettings, setOpenSettings] = useState(false);
 
@@ -62,9 +49,9 @@ function PostCard() {
             <div className='cardHeader'>
                 <div className='cardPoster'>
                     <div className='cardPosterImage'>
-                        <Avatar className='profileImage'
+                        <Avatar className='cardProfileImage'
                             src={post.userProfileImg}
-                            sx = {{width: 40, height: 40}}/> 
+                            sx = {{width: 40, height: 40, position: 'unset'}}/> 
                     </div>
                     <div className='cardPosterName'>
                         <p className='posterName'>{post.userName}</p>
@@ -79,7 +66,9 @@ function PostCard() {
                     <div>
                         {openSettings ? 
                             <div className='cardSettingsBtns'>
-                                <button className='editBtn' onClick={() => {editPost(post.id, post.tags, post.title, post.question)}}>Edit</button>
+                                <Link to = '/your-questions'>
+                                    <button className='editBtn'>Edit</button>
+                                </Link>
                                 <button className='deleteBtn' onClick={() => {deletePost(post.id)}}>Delete</button>
                             </div>:''
                         }

@@ -3,7 +3,6 @@ import SideBarNavigation from './SideBarNavigation'
 import '../App.css'
 
 function SideBar() {
-
   return (
       <div className='sideBarOuterContainer'>
             <div className='sideBarMain'>
@@ -25,7 +24,6 @@ function SideBar() {
                         </div>
                     </div>
                 </div>
-        
         </div>
   )
 }

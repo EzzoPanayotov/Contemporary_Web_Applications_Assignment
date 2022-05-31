@@ -17,7 +17,11 @@ function RegisterComponent() {
     }
     
     if (credentials.password.length < 6) {
-      return setError('Your password must be at least 6 characters');
+      return setError('Your password must be at least 6 characters!');
+    }
+
+    if(!credentials.email.includes('@')){
+      return setError('Please enter a valid email!')
     }
     createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
     .then((userCredentials) =>{

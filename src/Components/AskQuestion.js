@@ -53,13 +53,15 @@ function AskQuestion() {
             <input type='text'  placeholder='Your Title' 
                 onChange={(event) => {setNewTitle(event.target.value)}}required/>
 
-            <textarea type='text' placeholder='Type your question' 
+            <textarea className='textareaMain textareaMobile' placeholder='Type your question' 
                 onChange={(event) => {setNewQuestion(event.target.value)}}required/>
           <div className='askQuestionBtns'>
             <Link to='/'>
              <button className='cancelBtn' type='submit'>Cancel</button>
             </Link>
-            <button className='addQuestionBtn' type='submit' onClick={createPost}>Add/Update</button>
+            <button className='addQuestionBtn' type='submit' onClick={createPost}>
+              <img src={process.env.PUBLIC_URL + '/Images/askQuestionIcon.svg'} alt='Post question Icon'/>
+              Post</button>
           </div>
         </form>
         <RightSideInfo/>
