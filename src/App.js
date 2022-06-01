@@ -13,6 +13,7 @@ import Profile from './Pages/Profile';
 import PrivateRouteLoggedIn from './Components/PrivateRouteLoggedIn';
 import AskAQuestion from './Pages/AskAQuestion';
 import YourQuestionsComponent from './Components/YourQuestionsComponent';
+import PageNotFound from './Components/PageNotFound';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route path='/forgot-password' element={<PrivateRouteLoggedIn Component={ForgotPassword}/>}/>
               <Route path='/register' element={<PrivateRouteLoggedIn Component={Register}/>}/>
               <Route path='/login' element={<PrivateRouteLoggedIn Component={Login}/>}/>
+              <Route path='*' element={<PageNotFound/>}/>
             </Routes>
             <Footer/>
           </AuthProvider>

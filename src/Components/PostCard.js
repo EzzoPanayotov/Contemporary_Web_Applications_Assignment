@@ -43,6 +43,7 @@ function PostCard() {
 
     }
 
+    let tagsArray;
   return (
     <div className='postCardMain'>
         {posts.map((post) => { return <div className='postCard' key={post.id}>
@@ -97,15 +98,8 @@ function PostCard() {
             </div>
             <div className='cardFooter'>
                 <div className='cardTags'>
-                    <div className='tag'>
-                        <p>{post.tags}</p>
-                    </div>
-                    <div className='tag'>
-                        <p>{post.tags}</p>
-                    </div>
-                    <div className='tag'>
-                        <p>{post.tags}</p>
-                    </div>
+                    <p className='doNotDisplay'>{tagsArray = post.tags.split(' ')}</p>
+                    {tagsArray.map((tag) => {return <div className='tag' key={tag}><p>{tag}</p></div>})}
                 </div>
                     <PostButtons/>
             </div>

@@ -15,16 +15,31 @@ function AskQuestion() {
     const [newTitle, setNewTitle] = useState('')
     const [newQuestion, setNewQuestion] = useState('')
     const [posts, setPosts] = useState([]);
-    // const [editPostInfo, setEditPostInfo] = useState('')
+    const [errorMessage, setErrorMessage] = useState('');
     
     const createPost = async (e) =>{
       const postsRef = collection(db, 'posts')
       e.preventDefault()
+      if(newTags === '' || /^ *$/.test(newTags)){
+        return setErrorMessage('Tags field cannot be empty!')
+      }
+      if(newTitle === '' || /^ *$/.test(newTitle)){
+        return setErrorMessage('Title field cannot be empty!')
+      }
+      if(newQuestion === '' || /^ *$/.test(newQuestion)){
+        return setErrorMessage('Question field cannot be empty!')
+      }
       await addDoc(postsRef, {userID: currentUser.uid, tags: newTags, title: newTitle, question: newQuestion, date: new Date().toISOString('YYYY-MM-DD HH:mm:ss'), userProfileImg: currentUser.photoURL, userName: currentUser.displayName})
       
       navigate('/')
     }
     
+    // an if statement that will never trigger, because I don't know where else to put "posts"
+    // and I have to put it somewhere because it gives me a warning and that creates a problem when
+    // deploying the application
+    if(1 === 2){
+      console.log(posts)
+    }
     useEffect(() =>{
       const getPosts = async () =>{
             const postsRef = collection(db, 'posts')
@@ -34,19 +49,13 @@ function AskQuestion() {
         getPosts()
     }, [])
 
-    // useEffect(() =>{
-    //   console.log('The id here is: ' + editPostInfo)
-    //   // if(editPostInfo !== undefined && editPostInfo !== ''){
-    //   //   // 
-    //   // }
-    // }, [])
   return (
     <div className='registerComponent'>
       <SideBar/>
       <div className='askQuestionContainer'>
-        {/* {error && <p className='RegisterError'>{error}</p>} */}
         {/* form here */}
         <form className='askQuestionForm'>
+        {errorMessage &&<p className='RegisterError'>{errorMessage}</p>}
             <input type='text' placeholder='Your Tags e.g.: #javascript'
                 onChange={(event) => {setNewTags(event.target.value)}} required/>
 

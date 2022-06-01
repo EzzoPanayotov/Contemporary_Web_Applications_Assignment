@@ -4,19 +4,19 @@ import SideBar from './SideBar'
 import { collection, getDocs, doc, deleteDoc, getDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../Firebase'
 import { useAuth } from '../Contexts/AuthContext'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import PostButtons from './PostButtons'
 import '../App.css'
+
 function YourQuestionsComponent() {
 
     const { currentUser } = useAuth()
     const [posts, setPosts] = useState([]);
-    const [post, setPost] = useState(null);
+    const [post, setPost] = useState('');
     const [postId, setPostId] = useState('')
-    const [newTags, setNewTags] = useState({tags: ''})
-    const [newTitle, setNewTitle] = useState({title: ''})
-    const [newQuestion, setNewQuestion] = useState({question: ''})
+    const [errorMessage, setErrorMessage] = useState('')
+    const navigate = useNavigate()
   useEffect(() =>{
       
       const getPosts = async () =>{
@@ -39,7 +39,6 @@ const [openSettings, setOpenSettings] = useState(false);
 const getPostId = (id) =>{
     const postIdFromDoc = doc(db, 'posts', id)
     setPostId(postIdFromDoc)
-    console.log(id)
     if(postIdFromDoc.id === id){
         setOpenSettings(!openSettings)
     }
@@ -52,30 +51,51 @@ const editHandler = async (id) =>{
     setPost(postData.data())
 } 
 
-const updateHandler  = async (newTags, newTitle, newQuestion) =>{
-  const docRef = doc(db, 'posts', newTags, newTitle, newQuestion)
-  const newFields = {tags: newTags, title: newTitle, question: newQuestion}
-  await updateDoc(docRef, newFields)
-}
-
 const handleUserInputChange = (event) =>{
   const {name, value} = event.target;
-  setNewTags((prev) =>{
-    return {...prev, [name]: value}
-  })
-  setNewTitle((prev) =>{
-    return {...prev, [name]: value}
-  })
-  setNewQuestion((prev) =>{
+  setPost((prev) =>{
     return {...prev, [name]: value}
   })
 }
+
+const updateHandler = async () =>{
+  try {
+    if(post.tags === '' || /^ *$/.test(post.tags)){
+      return setErrorMessage('Tags field cannot be empty!')
+    }
+    if(post.title === '' || /^ *$/.test(post.title)){
+      return setErrorMessage('Title field cannot be empty!')
+    }
+    if(post.question === '' || /^ *$/.test(post.question)){
+      return setErrorMessage('Question field cannot be empty!')
+    }
+    await updateDoc(doc(db, 'posts', postId.id),{
+      userID : currentUser.uid,
+      tags: post.tags,
+      title: post.title,
+      question: post.question,
+      date: new Date().toISOString('YYYY-MM-DD HH:mm:ss'),
+      userProfileImg: currentUser.photoURL,
+      userName: currentUser.displayName
+    })
+  } catch (err) {
+    if(err){
+
+      setErrorMessage('Could not update post!')
+    }
+  }
+  navigate('/')
+}
+
+let tagsArray;
   return (
     <div className='yourQuestionsOuter'>
       <SideBar/>
       { post ?
-      <div className='editPost'>
+      <div className='editPostContainer'>
+      <div className='editPostMain'>
          <form className='askQuestionForm'>
+          {errorMessage && <p className='RegisterError'>{errorMessage}</p>}
             <input type='text' name='tags' placeholder='Your Tags e.g.: #javascript'
                 onChange={handleUserInputChange} value={post.tags} required/>
 
@@ -88,11 +108,12 @@ const handleUserInputChange = (event) =>{
             <Link to='/'>
              <button className='cancelBtn' type='submit'>Cancel</button>
             </Link>
-            <button className='addQuestionBtn' type='button' onClick={updateHandler}>
+            <button className='addQuestionBtn' type='button' onClick={() => {updateHandler(post.id)}}>
               <img src={process.env.PUBLIC_URL + '/Images/askQuestionIcon.svg'} alt='Post question Icon'/>
               Post</button>
           </div>
         </form>
+      </div>
       </div>:''
       }
       <div className='yourQuestionsMainContainer'>
@@ -119,7 +140,7 @@ const handleUserInputChange = (event) =>{
                     <div>
                         {openSettings ? 
                             <div className='cardSettingsBtns'>
-                                    <button className='editBtn' onClick={() => {editHandler(post.id)}}>Edit</button>
+                                <button className='editBtn' onClick={() => {editHandler(post.id)}}>Edit</button>
                                 <button className='deleteBtn' onClick={() => {deletePost(post.id)}}>Delete</button>
                             </div>:''
                         }
@@ -147,15 +168,10 @@ const handleUserInputChange = (event) =>{
             </div>
             <div className='cardFooter'>
                 <div className='cardTags'>
-                    <div className='tag'>
-                        <p>{post.tags}</p>
-                    </div>
-                    <div className='tag'>
-                        <p>{post.tags}</p>
-                    </div>
-                    <div className='tag'>
-                        <p>{post.tags}</p>
-                    </div>
+                <div className='cardTags'>
+                    <p className='doNotDisplay'>{tagsArray = post.tags.split(' ')}</p>
+                    {tagsArray.map((tag) => {return <div className='tag' key={tag}><p>{tag}</p></div>})}
+                </div>
                 </div>
                     <PostButtons/>
             </div>
