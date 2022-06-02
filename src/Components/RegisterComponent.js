@@ -26,7 +26,6 @@ function RegisterComponent() {
     createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
     .then((userCredentials) =>{
       const user = userCredentials.user;
-      console.log(userCredentials)
       
 
 

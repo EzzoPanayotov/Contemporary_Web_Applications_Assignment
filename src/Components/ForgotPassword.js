@@ -33,7 +33,7 @@ export default function ForgotPassword() {
       <div className='registerFormContainer'>
         <h2>Password Reset</h2>
         {error && <p className='RegisterError'>{error}</p>}
-        {message && <p className='RegisterError'>{message}</p>}
+        {message && <p className='forgotPasswordMessage'>{message}</p>}
         {/* form here */}
         <form className='registerForm' onSubmit={handleSubmit}>
             <input type='email' ref={emailRef} placeholder='Email' required/>

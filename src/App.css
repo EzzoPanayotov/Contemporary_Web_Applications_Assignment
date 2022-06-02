@@ -1795,6 +1795,10 @@ a:-webkit-any-link{text-decoration: none;}
   font-size: 18px;
 }
 
+/* Messages */
+.forgotPasswordMessage{
+  color: #28a745;
+}
 
 /* Errors */
 .RegisterError{
