@@ -152,7 +152,7 @@ If you want to get and set up this project on your local machine follow the step
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-For the usage and purpose of this project check the ***[Documentation](https://example.com)***.
+For the usage and purpose of this project check the ***[Documentation](./documentation.md)***.
 
 <!-- ROADMAP -->
 ## Roadmap

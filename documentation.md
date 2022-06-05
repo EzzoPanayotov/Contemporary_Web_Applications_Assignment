@@ -20,8 +20,8 @@ For this assignment, the prototype was followed, and a demo version of the produ
 The forum allows students to create posts containing their questions, and other students will be able to provide answers, make suggestions or give recommendations in a comment section.
 
 ## Methodology
-
-User stories were used to understand the requirements for the project, and the MoSCoW prioritization method was used to sort them.\
+User stories from agile were used to understand the requirements for the project, and the MoSCoW prioritization method was used to sort them.\
+Williams and Cockburn (2003, cited in Dingsøyr, Dybå and Moe 2010, p.2) state in an introduction to an IEEE Computer special issue on agile methods in 2003 that agile software development "is about feedback and change," and they emphasise that software development is an empirical or nonlinear process that requires short feedback loops to achieve a desirable, predictable outcome.\
 A user story describes the features of a system or software that will be useful to the user or purchaser (Cohn and Beck 2011, p.4).\
 MoSCoW is an abbreviation of four hierarchical priority groups:
 - "***MUST*** have": requirements that the project has to have.
@@ -38,7 +38,7 @@ The data gathered shows the following:
 - The users approved of the demo application's navigation.
 - Users were able to figure out the functionalities of the application fairly easily.
 - Some users were able to find visual and functional errors.
-- The majority of the users requested a better presentation of the feedback received from the system
+- The majority of the users requested a better presentation of the feedback received from the system.
 
 Each user gave an overall grade of the solution.
 | **User**   | **Grade**   |
@@ -74,3 +74,10 @@ Hopefully, I will be able to finalize and optimize the end product of this assig
 ## Appendix
 User stories prioritized using MoSCoW.
 ![MoSCoW User Stories](./MoSCoW%20User%20Stories.png "MoSCoW User Stories")
+
+## References
+COHN, M., and K. BECK, 2011. *User stories applied : For agile software development*. Boston Etc.: Addison-Wesley, , Cop.
+
+DINGSØYR, T., T. DYBÅ and N.B. MOE, 2010. *Agile Software Development : Current Research and Future Directions*. Berlin, Heidelberg: Springer Berlin Heidelberg.
+
+‌
