@@ -1,7 +1,7 @@
 # Implementation and Report
 
 Hristo Panayotov - 10103128\
-Hosted Website: https://solent-forum.netlify.app\
+Hosted Website: https://solent-forum.netlify.app/
 GitHub Repository: https://github.com/EzzoPanayotov/Solent-forum
 
 ## Introduction
