@@ -172,7 +172,7 @@ Distributed under the Apache 2.0 License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Hristo Panayotov - [ezzopanayotov@gmail.com](mailto:ezzopanayotov@gmail.com)
+Hristo Panayotov - [hristo.panayotov17@gmail.com](mailto:hristo.panayotov17@gmail.com)
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
